@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>ورود به مسابقه</title>
+    <style>
+        body {
+            background: #171717;
+            color: white;
+            font-family: Tahoma;
+            text-align: center;
+            padding-top: 80px;
+        }
+        .container {
+            width: 350px;
+            margin: auto;
+        }
+        input, button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+        button {
+            background: #7045e8;
+            color: white;
+            cursor: pointer;
+        }
+        .error {
+            color: #ff5555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>ورود به مسابقه</h2>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <form method="POST">
+            <input
+                type="text"
+                name="player_name"
+                placeholder="نام بازیکن"
+                required
+            >
+            <input
+                type="text"
+                name="room_code"
+                placeholder="کد ۶ رقمی مسابقه"
+                maxlength="6"
+                required
+            >
+            <button type="submit">
+                ورود به مسابقه
+            </button>
+        </form>
+    </div>
+</body>
+</html>

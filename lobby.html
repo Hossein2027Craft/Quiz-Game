@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اتاق مسابقه</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  {% if not room.started %}
+  <script>
+    // هر دو ثانیه وضعیت مسابقه بررسی شود
+    setTimeout(function () {
+      window.location.reload();
+    }, 2000);
+  </script>
+  {% endif %}
+  <body>
+    <div class="container">
+      <h1>اتاق مسابقه</h1>
+      <p>اتاق مسابقه با موفقیت ساخته شد!</p>
+      <div class="room-code">
+        <p>کد ورود به مسابقه:</p>
+        <h2>{{ room_code }}</h2>
+      </div>
+      <h3>بازیکنان حاضر:</h3>
+      {% for player in room.players %}
+      <p>{{ player }}</p>
+      {% endfor %} {% if not room.started %} {% if session.get("is_host") %}
+      <form
+        method="POST"
+        action="{{ url_for('start_match', room_code=room_code) }}"
+      >
+        <button type="submit">شروع مسابقه</button>
+      </form>
+      {% else %}
+      <p>منتظر شروع مسابقه توسط میزبان باشید...</p>
+      {% endif %} {% else %}
+      <a href="{{ url_for('game', room_code=room_code) }}"> ورود به بازی </a>
+      {% endif %}
+      <p>میزبان: {{ room.host }}</p>
+      <button onclick="navigator.clipboard.writeText('{{ room_code }}')">
+        کپی کد مسابقه
+      </button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>تنظیمات بازی</title>
+
+    <style>
+        body {
+            background: #171717;
+            color: white;
+            font-family: Tahoma;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            max-width: 450px;
+            margin: auto;
+        }
+        .setting {
+            background: #262626;
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 15px;
+            text-align: right;
+        }
+        input, select {
+            margin-top: 12px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 8px;
+            border: none;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 12px;
+            background: #7045e8;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>تنظیمات بازی</h2>
+    <form method="POST">
+        <div class="setting">
+            <label>تعداد سؤال‌ها</label>
+            <select name="question_count">
+                <option value="5">۵ سؤال</option>
+                <option value="10">۱۰ سؤال</option>
+                <option value="15">۱۵ سؤال</option>
+                <option value="20">۲۰ سؤال</option>
+            </select>
+        </div>
+        <div class="setting">
+            <label>زمان پاسخ‌گویی</label>
+            <select name="question_time">
+                <option value="10">۱۰ ثانیه</option>
+                <option value="20">۲۰ ثانیه</option>
+                <option value="30">۳۰ ثانیه</option>
+                <option value="60">۶۰ ثانیه</option>
+            </select>
+        </div>
+        <div class="setting">
+            <label>سطح دشواری</label>
+            <select name="difficulty">
+                <option value="easy">آسان</option>
+                <option value="medium">متوسط</option>
+                <option value="hard">سخت</option>
+            </select>
+        </div>
+        <div class="setting">
+            <label>
+                <input
+                    type="checkbox"
+                    name="sound"
+                    value="on"
+                    checked
+                    style="width:auto"
+                >
+                صدای بازی فعال باشد
+            </label>
+        </div>
+        <button type="submit">
+            ذخیره تنظیمات
+        </button>
+    </form>
+    <p>
+        <a href="/">بازگشت به صفحه اصلی</a>
+    </p>
+</div>
+</body>
+</html>

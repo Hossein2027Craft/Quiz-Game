@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>مسابقه اطلاعات عمومی</title>
+
+    <style>
+        body {
+            background: #19152f;
+            color: white;
+            font-family: Tahoma;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .question {
+            background: #292044;
+            padding: 25px;
+            border-radius: 18px;
+            margin: 25px 0;
+        }
+
+        .option {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            background: #7045e8;
+            color: white;
+            border: none;
+            padding: 18px;
+            margin: 12px 0;
+            border-radius: 12px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: #8b65f0;
+        }
+
+        .correct {
+            color: #22c55e;
+            font-size: 28px;
+        }
+
+        .wrong {
+            color: #ef4444;
+            font-size: 28px;
+        }
+
+        .next {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    {% if finished %}
+
+        <h1>🏆 مسابقه تمام شد!</h1>
+
+        <h2>امتیاز شما: {{ score }} از {{ total }}</h2>
+
+        <a href="/">بازگشت به صفحه اصلی</a>
+
+    {% else %}
+
+        <h1>مسابقه اطلاعات عمومی</h1>
+
+        <p>سؤال {{ index + 1 }} از {{ total }}</p>
+
+        <p>امتیاز شما: {{ score }}</p>
+
+        <div class="question">
+
+            <h2>{{ question.question }}</h2>
+
+            {% if not feedback %}
+
+                <form method="POST"
+                      action="{{ url_for('answer', room_code=session.get('room_code')) }}">
+
+                    {% for key, value in question.options.items() %}
+
+                        <button class="option"
+                                type="submit"
+                                name="answer"
+                                value="{{ key }}">
+                            {{ key }} - {{ value }}
+                        </button>
+
+                    {% endfor %}
+
+                </form>
+
+            {% else %}
+
+                {% if feedback.correct %}
+                    <div class="correct">
+                        ✓ پاسخ صحیح است!
+                    </div>
+                {% else %}
+                    <div class="wrong">
+                        ✗ پاسخ اشتباه است!
+                    </div>
+                    <p>
+                        پاسخ صحیح:
+                        {{ question.correct_answer }}
+                        -
+                        {{ question.options[question.correct_answer] }}
+                    </p>
+                {% endif %}
+                <form method="POST"
+                      action="{{ url_for('next_question', room_code=session.get('room_code')) }}">
+                    <button class="next" type="submit">
+                        سؤال بعدی
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>
